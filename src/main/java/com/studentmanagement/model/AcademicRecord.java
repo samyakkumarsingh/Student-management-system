@@ -20,8 +20,8 @@ public class AcademicRecord implements Serializable {
         this.studentId = studentId;
         this.subject = subject;
         this.semester = semester;
-        this.marks = marks;
-        this.grade = calculateGrade(marks);
+        this.marks = Math.max(0, Math.min(100, marks));
+        this.grade = calculateGrade(this.marks);
     }
     
     /**
@@ -67,8 +67,8 @@ public class AcademicRecord implements Serializable {
     }
     
     public void setMarks(double marks) {
-        this.marks = marks;
-        this.grade = calculateGrade(marks);
+        this.marks = Math.max(0, Math.min(100, marks));
+        this.grade = calculateGrade(this.marks);
     }
     
     public String getGrade() {

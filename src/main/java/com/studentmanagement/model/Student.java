@@ -73,7 +73,7 @@ public class Student implements Serializable {
     }
     
     public void setSemester(int semester) {
-        this.semester = semester;
+        this.semester = Math.max(1, semester);
     }
     
     @Override
