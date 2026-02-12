@@ -414,7 +414,7 @@ public class ConsoleUI {
             try {
                 date = LocalDate.parse(dateStr, dateFormatter);
             } catch (DateTimeParseException e) {
-                System.out.println("Invalid date format!");
+                System.out.println("Invalid date format! Expected format: yyyy-MM-dd");
                 return;
             }
         }
@@ -515,7 +515,7 @@ public class ConsoleUI {
                         record.getStatus());
             }
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid date format!");
+            System.out.println("Invalid date format! Expected format: yyyy-MM-dd");
         }
     }
     

@@ -25,7 +25,9 @@ public class DataStorage {
     private void createDataDirectory() {
         File dir = new File(DATA_DIR);
         if (!dir.exists()) {
-            dir.mkdirs();
+            if (!dir.mkdirs()) {
+                System.err.println("Error: Failed to create data directory. Please check file permissions.");
+            }
         }
     }
     
