@@ -83,11 +83,11 @@ S001
 Operating Systems
 5
 85.5
-6
+5
 4
 1
 S001
-6
+4
 5
 EOF
 

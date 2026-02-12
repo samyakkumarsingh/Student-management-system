@@ -46,6 +46,9 @@ public class StudentManagementSystem {
     }
     
     private static String centerText(String text, int width) {
+        if (text.length() >= width) {
+            return text.substring(0, width);
+        }
         int padding = (width - text.length()) / 2;
         return " ".repeat(padding) + text + " ".repeat(width - padding - text.length());
     }

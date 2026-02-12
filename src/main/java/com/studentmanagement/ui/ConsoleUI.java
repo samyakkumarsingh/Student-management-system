@@ -14,6 +14,7 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Console-based User Interface for the Student Management System.
@@ -230,7 +231,12 @@ public class ConsoleUI {
     private void addStudent() {
         System.out.println("\n--- Add New Student ---");
         System.out.print("Enter Student ID: ");
-        String id = scanner.nextLine();
+        String id = scanner.nextLine().trim();
+        
+        if (id.isEmpty()) {
+            System.out.println("Error: Student ID cannot be empty!");
+            return;
+        }
         
         if (studentManager.studentExists(id)) {
             System.out.println("Error: Student with ID " + id + " already exists!");
@@ -238,11 +244,16 @@ public class ConsoleUI {
         }
         
         System.out.print("Enter Name: ");
-        String name = scanner.nextLine();
+        String name = scanner.nextLine().trim();
+        
+        if (name.isEmpty()) {
+            System.out.println("Error: Name cannot be empty!");
+            return;
+        }
         System.out.print("Enter Email: ");
-        String email = scanner.nextLine();
+        String email = scanner.nextLine().trim();
         System.out.print("Enter Phone Number: ");
-        String phone = scanner.nextLine();
+        String phone = scanner.nextLine().trim();
         System.out.print("Enter Department: ");
         String department = scanner.nextLine();
         System.out.print("Enter Semester: ");
@@ -755,9 +766,9 @@ public class ConsoleUI {
         
         // Semester-wise distribution
         Map<Integer, Long> semesterDist = students.stream()
-                .collect(java.util.stream.Collectors.groupingBy(
+                .collect(Collectors.groupingBy(
                         Student::getSemester,
-                        java.util.stream.Collectors.counting()));
+                        Collectors.counting()));
         
         System.out.println("\nSemester-wise Distribution:");
         semesterDist.entrySet().stream()
@@ -783,7 +794,7 @@ public class ConsoleUI {
         
         for (Student student : students) {
             double percentage = attendanceManager.calculateAttendancePercentage(student.getStudentId());
-            if (attendanceManager.getStudentAttendance(student.getStudentId()).size() > 0) {
+            if (!attendanceManager.getStudentAttendance(student.getStudentId()).isEmpty()) {
                 System.out.printf("%-15s %-25s %-20.2f%%%n",
                         student.getStudentId(),
                         student.getName(),
@@ -798,6 +809,10 @@ public class ConsoleUI {
     private int getIntInput() {
         while (true) {
             try {
+                if (!scanner.hasNextLine()) {
+                    System.out.println("\nEnd of input reached.");
+                    System.exit(0);
+                }
                 String input = scanner.nextLine();
                 return Integer.parseInt(input);
             } catch (NumberFormatException e) {
@@ -809,6 +824,10 @@ public class ConsoleUI {
     private double getDoubleInput() {
         while (true) {
             try {
+                if (!scanner.hasNextLine()) {
+                    System.out.println("\nEnd of input reached.");
+                    System.exit(0);
+                }
                 String input = scanner.nextLine();
                 return Double.parseDouble(input);
             } catch (NumberFormatException e) {
