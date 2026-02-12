@@ -251,9 +251,9 @@ public class ConsoleUI {
             return;
         }
         System.out.print("Enter Email: ");
-        String email = scanner.nextLine();
+        String email = scanner.nextLine().trim();
         System.out.print("Enter Phone Number: ");
-        String phone = scanner.nextLine();
+        String phone = scanner.nextLine().trim();
         System.out.print("Enter Department: ");
         String department = scanner.nextLine();
         System.out.print("Enter Semester: ");

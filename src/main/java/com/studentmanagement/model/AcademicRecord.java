@@ -20,6 +20,7 @@ public class AcademicRecord implements Serializable {
         this.studentId = studentId;
         this.subject = subject;
         this.semester = semester;
+        // Clamp marks to the valid 0-100 range
         this.marks = Math.max(0, Math.min(100, marks));
         this.grade = calculateGrade(this.marks);
     }
@@ -66,6 +67,9 @@ public class AcademicRecord implements Serializable {
         return marks;
     }
     
+    /**
+     * Set marks, clamped to the valid range of 0-100.
+     */
     public void setMarks(double marks) {
         this.marks = Math.max(0, Math.min(100, marks));
         this.grade = calculateGrade(this.marks);

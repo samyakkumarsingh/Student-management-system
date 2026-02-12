@@ -72,6 +72,9 @@ public class Student implements Serializable {
         return semester;
     }
     
+    /**
+     * Set the semester, enforcing a minimum value of 1.
+     */
     public void setSemester(int semester) {
         this.semester = Math.max(1, semester);
     }
