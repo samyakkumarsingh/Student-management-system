@@ -272,6 +272,29 @@ public class MainFrame extends JFrame {
         }
     }
 
+    private String validateFields(String id, String name, int age, String dept,
+                                   String email, String phone, int year, double gpa) {
+        if (id.isEmpty() || name.isEmpty() || dept.isEmpty() || email.isEmpty() || phone.isEmpty()) {
+            return "All fields are required.";
+        }
+        if (age < 16 || age > 100) {
+            return "Age must be between 16 and 100.";
+        }
+        if (year < 1 || year > 6) {
+            return "Year must be between 1 and 6.";
+        }
+        if (gpa < 0.0 || gpa > 10.0) {
+            return "GPA must be between 0.0 and 10.0.";
+        }
+        if (!email.matches("^[\\w.%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
+            return "Please enter a valid email address.";
+        }
+        if (!phone.matches("^\\d{7,15}$")) {
+            return "Phone must contain 7 to 15 digits.";
+        }
+        return null;
+    }
+
     private void addStudent() {
         try {
             String id = addIdField.getText().trim();
@@ -283,8 +306,9 @@ public class MainFrame extends JFrame {
             int year = Integer.parseInt(addYearField.getText().trim());
             double gpa = Double.parseDouble(addGpaField.getText().trim());
 
-            if (id.isEmpty() || name.isEmpty() || dept.isEmpty() || email.isEmpty() || phone.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "All fields are required.", "Error", JOptionPane.ERROR_MESSAGE);
+            String error = validateFields(id, name, age, dept, email, phone, year, gpa);
+            if (error != null) {
+                JOptionPane.showMessageDialog(this, error, "Validation Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -344,8 +368,9 @@ public class MainFrame extends JFrame {
             int year = Integer.parseInt(updateYearField.getText().trim());
             double gpa = Double.parseDouble(updateGpaField.getText().trim());
 
-            if (id.isEmpty() || name.isEmpty() || dept.isEmpty() || email.isEmpty() || phone.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "All fields are required.", "Error", JOptionPane.ERROR_MESSAGE);
+            String error = validateFields(id, name, age, dept, email, phone, year, gpa);
+            if (error != null) {
+                JOptionPane.showMessageDialog(this, error, "Validation Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 

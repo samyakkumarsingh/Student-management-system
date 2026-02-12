@@ -19,6 +19,7 @@ public class StudentDAO {
             List<Student> students = (List<Student>) ois.readObject();
             return students;
         } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error reading student data: " + e.getMessage());
             return new ArrayList<>();
         }
     }
